@@ -5,20 +5,20 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-BOT_TOKEN = os.getenv("8821952610:AAFjfcdh2TITVYeSdAo-IScyzB555YAV76A")
-CHAT_ID = os.getenv("5044826420")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
 
 def send_telegram_message(message):
-    url = f"https://api.telegram.org/bot8821952610:AAFjfcdh2TITVYeSdAo-IScyzB555YAV76A/sendMessage"
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
     response = requests.post(
         url,
-        json={"chat_id": "5044826420", "text": "Someone pressed the Alert Button!"},
+        json={"chat_id": CHAT_ID, "text": "Someone pressed the Alert Button!"},
         timeout=10
     )
 
+    print("Telegram response:", response.text)
     response.raise_for_status()
-
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
